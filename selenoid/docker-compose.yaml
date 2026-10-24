@@ -1,0 +1,18 @@
+
+services:
+  selenoid:
+    image: aerokube/selenoid:1.11.3
+    container_name: my-ai-selenoid
+    ports:
+      - "127.0.0.1:4444:4444"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./browsers.json:/etc/selenoid/browsers.json:ro
+    command:
+      - "-conf"
+      - "/etc/selenoid/browsers.json"
+      - "-limit"
+      - "2"
+      - "-container-network"
+      - "selenoid_default"
+    restart: unless-stopped

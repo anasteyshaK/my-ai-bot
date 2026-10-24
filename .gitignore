@@ -69,3 +69,5 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+# Selenium session recordings
+*.mp4

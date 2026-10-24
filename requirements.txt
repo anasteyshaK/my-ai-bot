@@ -5,4 +5,5 @@ ollama==0.4.8
 gradio==5.30.0
 requests==2.32.3
 pytest==8.3.5
-selenium==4.49.0
+selenium==4.47.0
+pydantic==2.13.4
