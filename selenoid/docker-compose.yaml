@@ -1,5 +1,18 @@
 
 services:
+  gradio:
+    build:
+      context: ..
+      dockerfile: selenoid/Dockerfile.gradio
+    container_name: my-ai-gradio
+    ports:
+      - "127.0.0.1:7860:7860"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:7860/')"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
   selenoid:
     image: aerokube/selenoid:1.11.3
     container_name: my-ai-selenoid

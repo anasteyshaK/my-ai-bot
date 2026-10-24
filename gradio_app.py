@@ -114,11 +114,11 @@ if __name__ == "__main__":
     print("=" * 60)
     print("STARTING ALLIED TESTING AI ASSISTANT")
     print(f"API endpoint: {API_URL}")
-    print("Gradio URL: http://127.0.0.1:7860")
+    print("Gradio URL: http://0.0.0.0:7860")
     print("=" * 60)
 
     demo.launch(
-        server_name="127.0.0.1",
+        server_name="0.0.0.0",
         server_port=7860,
         show_error=True
     )
