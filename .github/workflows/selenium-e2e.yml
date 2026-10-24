@@ -1,0 +1,48 @@
+
+name: Selenium E2E Tests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selenium-tests:
+    name: Test Gradio UI
+    runs-on: [self-hosted, windows, x64]
+
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Python
+        shell: powershell
+        run: |
+          python --version
+
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          python -m pip install pytest selenium requests
+
+      - name: Start Selenoid
+        shell: powershell
+        run: |
+          docker compose -f .\selenoid\docker-compose.yaml up -d
+          Invoke-RestMethod http://localhost:4444/status
+
+      - name: Check Gradio
+        shell: powershell
+        run: |
+          Invoke-WebRequest http://localhost:7860 -UseBasicParsing
+
+      - name: Run Selenium tests
+        shell: powershell
+        env:
+          SELENOID_URL: http://localhost:4444/wd/hub
+          GRADIO_URL: http://host.docker.internal:7860
+        run: |
+          python -m pytest tests/seleniumtest.py::test_open_gradio_app -v
