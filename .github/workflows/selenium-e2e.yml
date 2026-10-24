@@ -2,6 +2,9 @@
 name: Selenium E2E Tests
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
