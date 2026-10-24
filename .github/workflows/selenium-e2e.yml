@@ -36,6 +36,7 @@ jobs:
 
       - name: Start Gradio and Selenoid
         run: |
+          docker pull selenoid/chrome:128.0
           docker compose -f selenoid/docker-compose.yaml up -d --build
 
       - name: Wait for Gradio and Selenoid
